@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            max-width: 640px;
+            margin: 0 auto;
+            height: 100%;
+            width: 100%;
+            background: red;
+        }
+        #canvas{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            display: none;
+        }
+
+        .body_img{
+            width: 315px;
+            height: 420px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+    </style>
+
+</head>
+<body>
+<canvas id='canvas' width='945' height='1260'></canvas>
+<img src="" alt="" class='body_img'>
+
+
+<script>
+    var bg = {
+        width: 315,
+        height: 420,
+        x: 0,
+        y: 0,
+        src: 'https://file.dayutang.cn/2019/05/06/1557149372626.png',
+    }
+    var code = {
+        width: 48,
+        height: 48,
+        x: 250,
+        y: 338,
+        src: 'https://file.dayutang.cn/2019/02/15/1550219422724.jpg',
+    }
+
+    var title = {
+        width: 121,
+        height: 40,
+        x: 97,
+        y: 6,
+        src: 'https://file.dayutang.cn/2019/05/07/1557200053709.png',
+    }
+    var model = {
+        width: 280,
+        height: 210,
+        x: 18,
+        y: 52,
+        src: 'https://file.dayutang.cn/2019/05/07/1557200141340.jpg',
+    }
+    var title_p = {
+        name: '我是学霸，我怕谁',
+        width: 128*3,
+        height: 22*3,
+        x: 18*3,
+        y: 296*3,
+        font: 'normal normal bold 48px PingFang-SC-Regular',
+        fontStyle: '#333333'
+    }
+
+    var title_h1 = {
+        name: '新东方旗下大塘小鱼',
+        width: 126*3,
+        height: 20*3,
+        x: 18*3,
+        y: 361*3,
+        font: 'normal normal bold 42px STYuanti-SC-Bold',
+        fontStyle: '#333333'
+    }
+
+    var title_h2 = {
+        name: '蹭课0元学 AI 1对1名师私塾课',
+        width: 151*3,
+        height: 17*3,
+        x: 18*3,
+        y: 386*3,
+        font: 'normal normal bold 36px STYuanti-SC-Bold',
+        fontStyle: '#666666'
+    }
+    var body_img = document.getElementsByClassName('body_img')[0];
+    var strDataUrl;
+
+    var image1 = new Image();
+    var image2 = new Image();
+    var image3 = new Image();
+    var image4 = new Image();
+    var image5 = new Object();
+    var image6 = new Object();
+    var image7 = new Object();
+
+    image1 = getObjKey(image1, bg);
+    image2 = getObjKey(image2, code);
+    image3 = getObjKey(image3, title);
+    image4 = getObjKey(image4, model);
+    image5 = getObjKey(image5, title_p);
+    image6 = getObjKey(image6, title_h1);
+    image7 = getObjKey(image7, title_h2);
+    getELe(image1);
+    getELe(image2);
+    getELe(image3);
+    getELe(image4);
+    var c = document.getElementById('canvas');
+    var ctx = c.getContext("2d");
+    image1.onload = function () {
+        ctx.drawImage(image1, image1.x*3, image1.y*3, image1.width*3, image1.height*3);
+        strDataUrl = c.toDataURL('image/png');
+        body_img.src = strDataUrl;
+    }
+    image2.onload = function(){
+        ctx.drawImage(image2, code.x*3, code.y*3, image2.width*3, image2.height*3);
+        strDataUrl = c.toDataURL('image/png');
+        body_img.src = strDataUrl;
+    }
+    image3.onload = function () {
+        ctx.drawImage(image3, title.x*3, title.y*3, image3.width*3, image3.height*3);
+        strDataUrl = c.toDataURL('image/png');
+        body_img.src = strDataUrl;
+    }
+    image4.onload = function(){
+        ctx.drawImage(image4, model.x*3, model.y*3, image4.width*3, image4.height*3)
+        saveFont();
+        strDataUrl = c.toDataURL('image/png');
+        body_img.src = strDataUrl;
+    }
+    // 数据传递封装
+    function getObjKey(obj,obj1) {
+        if(typeof obj == 'object' && typeof obj1 == 'object'){
+            for(let key in obj1){
+                if(obj.hasOwnProperty[key] == undefined){
+                    obj[key] = obj1[key]
+                }
+            }
+            return obj
+        }
+    }
+    // 给元素添加某些特定的值
+    function getELe(ele) {
+        ele.setAttribute("crossOrigin",'Anonymous');
+    }
+    // 字体的封装
+    function getCanvasFont(obj,obj1) {
+        obj.font = obj1.font;
+        obj.fillStyle = obj1.fontStyle;
+        obj.fillText(obj1.name, obj1.x, obj1.y);
+    }
+    function saveFont() {
+        ctx.save();
+        ctx.arc(185, 1235, 65, 0, Math.PI * 2, false);  // 我也不知道这个有啥用
+        ctx.clip(); // 这个是截取
+        ctx.restore(); // 还原状态
+        getCanvasFont(ctx, title_p);
+        getCanvasFont(ctx, title_h1);
+        getCanvasFont(ctx, title_h2);
+
+    }
+
+</script>
+
+</body>
+
+</html>
