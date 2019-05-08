@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas height='500' width='500' style='border: 1px solid black' class='can'>
+
+</canvas>
+<script>
+    function drawTrails() {
+        var canvas = document.querySelector('.can');
+        var context = canvas.getContext('2d');
+        context.save();
+        context.translate(130, 250);
+        createCanopyPath(context);
+        context.stroke();
+        context.restore();
+    }
+    function createCanopyPath(context) {
+        context.beginPath();    // 开始绘制图形
+        context.moveTo(-25, -50);   // 绘制终点坐标
+        context.lineTo(-10, -80);   // 绘制开始坐标
+        context.lineTo(-20, -80);   // 绘制开始坐标
+        context.lineTo(-5, -110);   // 绘制开始坐标
+        context.lineTo(-15, -110);   // 绘制开始坐标
+        //
+        context.lineTo(0, -140);   // 绘制开始坐标
+        //
+        // context.lineTo(15, -110);   // 绘制开始坐标
+        // context.lineTo(5, -110);   // 绘制开始坐标
+        // context.lineTo(20, -80);   // 绘制开始坐标
+        // context.lineTo(10, -80);   // 绘制开始坐标
+        // context.lineTo(25, -50);   // 绘制开始坐标
+        //
+        //
+        // context.closePath();    //  连接起点 闭合路径
+
+    }
+    drawTrails();
+</script>
+</body>
+</html>

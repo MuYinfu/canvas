@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--<canvas height='200' width='200' style='border: 1px solid black'></canvas>-->
+<script>
+    try {
+        document.createElement("canvas").getContext();
+        alert('您的浏览器支持canvas画布')
+    }
+    catch (e) {
+        alert('您的浏览器不支持canvas画布')
+    }
+</script>
+</body>
+</html>

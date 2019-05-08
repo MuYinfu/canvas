@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas height='200' width='200' style='border: 1px solid black' class='can'>
+
+    </canvas>
+
+    <div contenteditable = 'true'>
+
+    </div>
+
+    <script>
+        function getCanvas() {
+            //  获取画布信息
+            var c =document.querySelector(".can");
+            //  声明为2d视图
+            var ctx = c.getContext('2d');
+            //  用坐标来绘制一条路径
+            ctx.beginPath();
+            ctx.moveTo(40,200); // ctx.moveTo(x,y) 目标距离x y的位置 在这个函数执行时,并没有开始绘画,只是在定位置
+            ctx.lineTo(70,70);  // ctx.lineTo(x,y) 起点距离x y的位置 定好起点位置后,在起点和结束位置中间合成一条线
+
+            //  将绘制的线放到画布上
+            ctx.stroke();
+        }
+        function getCanvas1() {
+            //  获取画布信息
+            var c =document.querySelector(".can");
+            //  声明为2d视图
+            var ctx = c.getContext('2d');
+            //  保存当前画布状态
+            ctx.save();
+            //  向右下方移动
+            ctx.translate(100,100)   //  ctx.translate(x,y) 距离画布左上角的位置
+            //  用坐标来绘制一条路径
+            ctx.beginPath();    //  用来通知画布可以绘制图形了
+            ctx.moveTo(20,0);
+            ctx.lineTo(10,100);
+
+            //  将绘制的线放到画布上
+            ctx.stroke();
+            ctx.restore();
+        }
+        window.addEventListener('load', getCanvas, true)
+    </script>
+</body>
+</html>

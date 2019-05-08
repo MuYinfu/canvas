@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas height='700' width='700' style='border: 1px solid black' class='can'>
+
+</canvas>
+<script>
+    function drawTrails() {
+        var canvas = document.querySelector('.can');
+        var context = canvas.getContext('2d');
+        context.save();
+        createCanopyPath(context);
+        getHighway(context);
+        context.stroke();
+        context.restore();
+    }
+    function createCanopyPath(context) {
+        context.beginPath();    // 开始绘制图形
+
+        context.moveTo(100, 200);   // 绘制终点坐标
+        context.lineTo(130, 150);   // 绘制开始坐标
+        context.lineTo(110, 150);   // 绘制开始坐标
+        context.lineTo(150, 100);   // 绘制开始坐标
+        context.lineTo(130, 100);   // 绘制开始坐标
+        context.lineTo(170, 60);   // 树定点坐标
+        context.lineTo(210, 100);   // 绘制开始坐标
+        context.lineTo(190, 100);   // 绘制开始坐标
+        context.lineTo(230, 150);   // 绘制开始坐标
+        context.lineTo(210, 150);   // 绘制开始坐标
+        context.lineTo(240, 200);   // 绘制开始坐标
+
+        context.closePath();    //  连接起点 闭合路径
+        context.strokeStyle = '#664400';
+        context.lineWidth = 4;  // 设置线的宽度
+        context.lineJoin = "round";  // 设置平滑路径的结合点(优化连接点使拐角更加圆滑)
+
+        context.fillStyle = "#339900";  // fill填充  fillStyle填充背景色
+        context.fill(); // 填充如果放在绘制之前则会完全展示路径的宽度,放在之后则会是宽度减少一半
+        context.fillStyle = "#663300";  // 设置树干的颜色
+        context.fillRect(160,200,20,70); // 这个函数有4个参数 x y width height
+        context.save(); // 保存此时的图层
+
+    }
+    function getHighway(context){
+        context.beginPath();
+
+        context.moveTo(-50,440);
+
+        context.quadraticCurveTo(200,280,370,410);
+        context.quadraticCurveTo(480,510,800,170);
+
+        context.strokeStyle = "#663300";
+        context.lineWidth = 20;
+
+        context.save();
+    }
+    drawTrails();
+</script>
+</body>
+</html>
